@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    </head>
+<body>
+
+
+<form action="/action_page.php">
+  First name:<br>
+  <input type="text" name="firstname" value="">
+  <br>
+  Last name:<br>
+  <input type="text" name="lastname" value="">
+  <br><br>
+
+<form action="/action_page.php">
+    E-mail:<br>
+  <input type="email" name="email">
+</form>
+
+Password:<br>
+<input type="password" name="psw">
+</form>
+
+
+
+<form action="/action_page.php" method="get">
+    Grade:<br>
+<input list="browsers" name="browser">
+<datalist id="browsers">
+  <option value="Senior">
+  <option value="Junior">
+  <option value="Sophomore">
+  <option value="Freshman">
+</datalist>
+</form>
+
+<form action="/action_page.php">
+  <input type="radio" name="gender" value="male" checked> Male<br>
+  <input type="radio" name="gender" value="female"> Female<br>
+  <input type="radio" name="gender" value="other"> Other<br><br>
+</form>
+
+
+<form action="/action_page.php">
+<input type="checkbox" name="email" value="receives email">I would like to receive email.
+<br><br>
+
+
+
+  <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html>
