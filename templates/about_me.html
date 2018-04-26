@@ -1,44 +1,28 @@
-<html>
-    <head>
-        <title>About Fernando</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+{% extends "base.html" %}
 
-    </head>
-    <body>
-        <div class="container">
-        <h1>About me</h1>
-        <table class="table">
-        <p>I am a senior at South San Francisco High School. I will will be attending at Notre Dame de Namur University after I graduate.</p>
+{% block title %}About Me{% endblock %}
 
-        <p>I was born January 23, 2000, right now I am 18 years old. I live in San Francisco near Daly city bart station. </p>
+{% block content %}
 
-        <p>I am Mexican and 6'2, I enjoy playing basketball, Players Unknown Battle Grounds, sometimes Fortnite, and I love Battlefield 1.</p>
+<h2>About Me</h2>
 
-        <p>I hope to soon live in Belmont or Redwood City.</p>
+<p>I am a senior at South San Francisco High School. I will will be attending at Notre Dame de Namur University after I graduate. I was born January 23, 2000, right now I am 18 years old. I live in San Francisco near Daly city bart station. I am Mexican and 6'2, I enjoy playing basketball, Players Unknown Battle Grounds, sometimes Fortnite, and I love Battlefield 1.I hope to soon live in Belmont or Redwood City.I never tried sushi.</p>
 
-        <p>I never tried sushi.</p>
+<h2>Hobbies</h2>
 
+<ul>
+    <li>Swimming</li>
+    <li>Hiking</li>
+    <li>Singing</li>
+</ul>
 
-         <h2>Hobbies</h2>
+<img src='static/images/Tree_NL.png' alt='tree'></img>
 
-        <p>My hobbies: </p>
-        <ul>
-
-
-            <li>Basketball</li>
-
-            <li>Gaming</li>
-
-            <li>Eating</li>
-        </ul>
+{% endblock %}
 
 
 
 
 
 
-        <img src='static/images/Tree_NL.png' alt='tree'></img>
-    </table>
-    </body>
-    </div>
-    </html>
+
