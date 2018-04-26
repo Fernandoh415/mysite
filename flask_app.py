@@ -27,6 +27,6 @@ def register():
     return render_template('register.html',
                             courses=constants.COURSES)
 
-@app.route('/')
+@app.route('/index')
 def homepage():
     return render_template('index.html')
