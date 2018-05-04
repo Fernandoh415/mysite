@@ -4,6 +4,7 @@
 from flask import Flask
 from flask import render_template
 import constants
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
@@ -30,3 +31,18 @@ def register():
 @app.route('/index')
 def homepage():
     return render_template('index.html')
+
+
+@app.route('/top_ten_songs')
+def top_ten_songs():
+    return render_template('top_ten_songs.html', songs=constants.TOP_TEN_SONGS)
+
+
+app.config.from_object('config.BaseConfig')
+db = SQLAlchemy(app)
+
+
+
+
+
+
