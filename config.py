@@ -5,3 +5,4 @@ class BaseConfig(object):
         '@fernandoh41500.mysql.pythonanywhere-services.com/'
         'fernandoh41500$mysitedb')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'nano'

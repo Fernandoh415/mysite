@@ -8,6 +8,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, Subgroup, View
+from flask_sslify import SSLify
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Email, Length
 
 
 
@@ -18,6 +22,8 @@ app.config.from_object('config.BaseConfig')
 db = SQLAlchemy(app)
 
 Bootstrap(app)
+SSLify(app)
+
 
 nav = Nav(app)
 @nav.navigation('mysite_navbar')
@@ -52,6 +58,14 @@ class Song(db.Model):
     artist_name = db.Column(db.String(80))
     youtube_url = db.Column(db.String(300))
 
+class RegistrationForm(FlaskForm):
+    username = StringField(
+        'Username', validators=[InputRequired(), Length(min=4, max=15)])
+    email = StringField(
+        'Email', validators=[InputRequired(), Email()])
+    password = PasswordField(
+        'Password', validators=[InputRequired(), Length(min=8, max=80)])
+    submit = SubmitField('Register')
 
 
 @app.route('/')
@@ -69,9 +83,17 @@ def class_schedule():
     return render_template('class_schedule.html',
                            courses=courses)
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        return (
+            form.username.data + ', ' +
+            form.email.data + ', ' +
+            form.password.data)
+    return render_template('register.html', form=form)
+
+
 
 @app.route('/index')
 def homepage():
