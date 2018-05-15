@@ -12,7 +12,11 @@ from flask_sslify import SSLify
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Email, Length
-
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
+from flask import redirect
+from flask import url_for
+from wtforms.validators import ValidationError
 
 
 
@@ -68,6 +72,24 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(15))
+    email = db.Column(db.String(150))
+    password_hash = db.Column(db.String(128))
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please choose a different username.')
+
+
 @app.route('/')
 def hello_world():
     return 'Hello from Fernando'
@@ -83,14 +105,18 @@ def class_schedule():
     return render_template('class_schedule.html',
                            courses=courses)
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        return (
-            form.username.data + ', ' +
-            form.email.data + ', ' +
-            form.password.data)
+        new_user = User(
+            username=form.username.data,
+            email=form.email.data)
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('homepage'))
     return render_template('register.html', form=form)
 
 
